@@ -13,12 +13,12 @@
           set -x
           cat > clonemap.yaml << EOF
           clonemap:
-            - name: openstack-infra/devstack-gate
+            - name: openstack/devstack-gate
               dest: devstack-gate
           EOF
           /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
-              git://git.openstack.org \
-              openstack-infra/devstack-gate
+              git://opendev.org \
+              openstack/devstack-gate
         executable: /bin/bash
         chdir: '{{ ansible_user_dir }}/workspace'
       environment: '{{ zuul | zuul_legacy_vars }}'
@@ -33,7 +33,7 @@
           export DEVSTACK_GATE_GRENADE=pullup
           # Grenade needs to clone the placement repo on the Stein side since
           # the repo did not exist in Rocky.
-          export PROJECTS="openstack-dev/grenade openstack/placement $PROJECTS"
+          export PROJECTS="openstack/grenade openstack/placement $PROJECTS"
           # Default to non DVR
           export DEVSTACK_GATE_NEUTRON_DVR=0
           export BRANCH_OVERRIDE=default
